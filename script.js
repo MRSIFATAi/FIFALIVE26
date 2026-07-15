@@ -1,6 +1,6 @@
 // আপনার দেওয়া নতুন আইফ্রেমের আসল লিঙ্কটি ডিফল্ট করা হলো
 const defaultStream = "https://ritzembeds.pages.dev/play/fox-usa";
-const adminPass = "admin123"; // আপনার পাসওয়ার্ড পরিবর্তন করতে চাইলে এখানে করবেন
+const adminPass = "admins123"; // আপনার পাসওয়ার্ড পরিবর্তন করতে চাইলে এখানে করবেন
 
 // DOM Elements
 const livePlayer = document.getElementById('livePlayer');

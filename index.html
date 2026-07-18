@@ -3,72 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>প্রিমিয়াম লাইভ স্ট্রিম ইউআই</title>
+    <title>লাইভ স্ট্রিম ও কাউন্টডাউন ইউআই</title>
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- ১. টপ নোটিফিকেশন ব্যানার -->
+    <div class="top-banner">
+        <i class="fa-solid fa-bullhorn text-flash"></i> 
+        <marquee behavior="scroll" direction="left" scrollamount="5">খেলা শুরু হওয়ার আগে লাইভ শুরু হয়ে যাবে। আমাদের সাথেই থাকুন!</marquee>
+    </div>
+
+    <!-- ২. ওয়েবসাইট আনলক ওভারলে -->
+    <div id="unlockOverlay" class="unlock-overlay">
+        <div class="unlock-box">
+            <div class="lock-icon-box">
+                <i class="fa-solid fa-lock" id="lockIcon"></i>
+            </div>
+            <h2>স্ট্রিমটি আনলক করুন</h2>
+            <p>লাইভ খেলাটি দেখতে নিচের বাটনে ক্লিক করে আমাদের ইউটিউব চ্যানেলটি সাবস্ক্রাইব করুন।</p>
+            <a href="https://youtube.com/@sifatedit_z?si=FQUkBiEpUjxoQIsi" target="_blank" class="unlock-btn" id="unlockBtn">
+                <i class="fa-brands fa-youtube"></i> আনলক করতে সাবস্ক্রাইব করুন
+            </a>
+            <span id="countdownText" class="countdown-text"></span>
+        </div>
+    </div>
+
+    <!-- ৩. মেইন হেডার -->
     <header>
         <div class="logo">
             <h2><i class="fa-solid fa-circle-play"></i> EXPLAINED <span>SIFAT</span></h2>
         </div>
         <div class="header-right">
             <div class="viewer-box">
-                <i class="fa-solid fa-eye"></i>
-                <span id="liveViewers">14,520</span> ওয়াচিং
+                <i class="fa-solid fa-eye animate-flicker"></i>
+                <span id="liveViewers">1</span> জন দেখছেন
             </div>
             <button class="admin-btn" id="openAdmin" title="অ্যাডমিন প্যানেল"><i class="fa-solid fa-user-gear"></i></button>
         </div>
     </header>
 
+    <!-- ৪. মেইন কন্টেন্ট এরিয়া -->
     <main class="container">
         <div class="player-header">
             <span class="status-badge"><i class="fa-solid fa-circle pulse"></i> লাইভ</span>
             <h1 id="streamTitle">Fox USA - Live Stream</h1>
         </div>
 
+        <!-- ভিডিও প্লেয়ার -->
         <div class="video-wrapper">
             <iframe id="livePlayer" src="" width="100%" height="100%" frameborder="0" scrolling="no" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
         </div>
-    </main>
 
-    <div class="popup" id="subPopup">
-        <div class="popup-content">
-            <div class="popup-icon">
-                <i class="fa-brands fa-youtube"></i>
+        <!-- পরবর্তী ম্যাচ কাউন্টডাউন সেকশন -->
+        <div class="countdown-section">
+            <div class="countdown-header">
+                <span><i class="fa-regular fa-calendar-check"></i> পরবর্তী আকর্ষণীয় ম্যাচ</span>
+                <h2 id="nextMatchTitle">Argentina vs Spain</h2>
+                <p id="nextMatchDateDisplay">তারিখ ও সময় লোড হচ্ছে...</p>
             </div>
-            <div class="popup-text">
-                <p>লাইভ স্ট্রিমটি ভালো লাগলে</p>
-                <h4>আমাদের ইউটিউব চ্যানেলটি সাবস্ক্রাইব করুন!</h4>
+            <div class="timer-grid">
+                <div class="time-box"><span id="days">00</span><small>দিন</small></div>
+                <div class="time-box"><span id="hours">00</span><small>ঘণ্টা</small></div>
+                <div class="time-box"><span id="minutes">00</span><small>মিনিট</small></div>
+                <div class="time-box"><span id="seconds">00</span><small>সেকেন্ড</small></div>
             </div>
         </div>
-        <a href="https://youtube.com/@sifatedit_z?si=FQUkBiEpUjxoQIsi" target="_blank" class="sub-btn" id="subBtn">
-            <i class="fa-solid fa-bell"></i> Subscribe
-        </a>
-    </div>
+    </main>
 
+    <!-- ৫. অ্যাডমিন প্যানেল মডাল -->
     <div class="modal" id="adminModal">
         <div class="modal-content">
             <span class="close-modal" id="closeModal">&times;</span>
             
+            <!-- লগইন ফর্ম -->
             <div id="loginForm">
                 <h3>অ্যাডমিন লগইন</h3>
-                <p style="color: #aaa; font-size: 13px; margin-bottom: 15px;">শুধুমাত্র অ্যাডমিন এক্সেস</p>
-                <input type="password" id="adminPassword" placeholder="পাসওয়ার্ড দিন (Default: admin123)">
+                <p style="color: #aaa; font-size: 13px; margin-bottom: 15px;">শুধুমাত্র ওনার এক্সেস</p>
+                <input type="password" id="adminPassword" placeholder="পাসওয়ার্ড দিন">
                 <button id="loginBtn">লগইন</button>
             </div>
 
+            <!-- অ্যাডমিন ড্যাশবোর্ড (লিঙ্ক ও কাউন্টডাউন পরিবর্তন) -->
             <div id="adminActions" class="hidden">
-                <h3>স্ট্রিম লিঙ্ক আপডেট</h3>
-                <p style="color: #aaa; font-size: 13px; margin-bottom: 15px;">এখানে পুরো Iframe কোড অথবা শুধু URL লিঙ্কটি পেস্ট করুন</p>
-                <input type="text" id="newStreamLink" placeholder="<iframe src='...' ...></iframe> অথবা URL">
-                <button id="updateLinkBtn">লিঙ্ক পরিবর্তন করুন</button>
+                <h3>অ্যাডমিন কন্ট্রোল প্যানেল</h3>
+                
+                <div class="admin-input-group">
+                    <label>১. লাইভ স্ট্রিম আপডেট করুন</label>
+                    <input type="text" id="newStreamLink" placeholder="Iframe কোড অথবা URL দিন">
+                </div>
+
+                <div class="admin-input-group">
+                    <label>২. পরবর্তী ম্যাচের নাম</label>
+                    <input type="text" id="matchTitleInput" placeholder="যেমন: Argentina vs Spain">
+                </div>
+
+                <div class="admin-input-group">
+                    <label>৩. ম্যাচের তারিখ ও সময়</label>
+                    <input type="datetime-local" id="matchDateTimeInput">
+                </div>
+
+                <button id="updateAdminBtn">সব কিছু আপডেট করুন</button>
             </div>
         </div>
     </div>
 
+    <!-- External JS -->
     <script src="script.js"></script>
 </body>
-</html>
+    </html>

@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>লাইভ স্ট্রিম ও কাউন্টডাউন ইউআই</title>
+    <title>লাইভ স্ট্রিম ও রিয়েলটাইম কাউন্টডাউন</title>
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Firebase core SDK and Database (Compatibility Version) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 </head>
 <body>
 
@@ -40,9 +44,10 @@
             <h2><i class="fa-solid fa-circle-play"></i> EXPLAINED <span>SIFAT</span></h2>
         </div>
         <div class="header-right">
+            <!-- ফায়ারবেজ অরিজিনাল ভিউয়ার কাউন্টার -->
             <div class="viewer-box">
                 <i class="fa-solid fa-eye animate-flicker"></i>
-                <span id="liveViewers">1</span> জন দেখছেন
+                <span id="liveViewers">১</span> জন দেখছেন
             </div>
             <button class="admin-btn" id="openAdmin" title="অ্যাডমিন প্যানেল"><i class="fa-solid fa-user-gear"></i></button>
         </div>
@@ -52,7 +57,7 @@
     <main class="container">
         <div class="player-header">
             <span class="status-badge"><i class="fa-solid fa-circle pulse"></i> লাইভ</span>
-            <h1 id="streamTitle">Fox USA - Live Stream</h1>
+            <h1 id="streamTitle">Live Streaming</h1>
         </div>
 
         <!-- ভিডিও প্লেয়ার -->
@@ -89,7 +94,7 @@
                 <button id="loginBtn">লগইন</button>
             </div>
 
-            <!-- অ্যাডমিন ড্যাশবোর্ড (লিঙ্ক ও কাউন্টডাউন পরিবর্তন) -->
+            <!-- অ্যাডমিন ড্যাশবোর্ড -->
             <div id="adminActions" class="hidden">
                 <h3>অ্যাডমিন কন্ট্রোল প্যানেল</h3>
                 
@@ -108,7 +113,7 @@
                     <input type="datetime-local" id="matchDateTimeInput">
                 </div>
 
-                <button id="updateAdminBtn">সব কিছু আপডেট করুন</button>
+                <button id="updateAdminBtn">সব কিছু ক্লাউডে আপডেট করুন</button>
             </div>
         </div>
     </div>
@@ -116,4 +121,4 @@
     <!-- External JS -->
     <script src="script.js"></script>
 </body>
-    </html>
+        </html>

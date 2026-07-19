@@ -1,213 +1,428 @@
-/* Base Reset & Fonts */
+/* =========================================================================
+   🌐 ১. গ্লোবাল রিসেট এবং রুট থিম (Global Reset & Base Theme)
+   ========================================================================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Hind Siliguri', 'Segoe UI', sans-serif;
+    font-family: 'Hind Siliguri', sans-serif;
 }
 
 body {
-    background: linear-gradient(135deg, #09090e 0%, #141423 100%);
+    background-color: #0f0f14;
     color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    padding: 0 20px 40px 20px;
+    overflow-x: hidden;
+    padding-bottom: 60px; /* ফ্লোটিং পপআপের জন্য নিচে বাড়তি জায়গা */
 }
 
-/* টপ নোটিফিকেশন ব্যানার */
+/* হিডেন ক্লাসের জন্য জেনেরিক স্টাইল */
+.hidden {
+    display: none !important;
+}
+
+/* =========================================================================
+   📢 ২. টপ নোটিফিকেশন ব্যানার (Top Notification Banner)
+   ========================================================================= */
 .top-banner {
-    width: 100%;
-    background: linear-gradient(90deg, #ff5e00 0%, #ff2a00 100%);
+    background: linear-gradient(90deg, #ff0055, #7a00ff);
     color: #fff;
     padding: 10px 20px;
-    font-weight: 700;
-    font-size: 14px;
     display: flex;
     align-items: center;
     gap: 10px;
-    box-shadow: 0 4px 15px rgba(255, 42, 0, 0.2);
-    margin-bottom: 20px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    max-width: 1050px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(255, 0, 85, 0.3);
+    z-index: 99;
+    position: relative;
 }
 
 .top-banner marquee {
-    font-weight: 600;
+    flex: 1;
 }
 
 .text-flash {
-    animation: flash 1s infinite alternate;
+    animation: flash 1.5s infinite;
 }
 
 @keyframes flash {
-    0% { opacity: 0.4; }
-    100% { opacity: 1; }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
 }
 
-/* আনলক স্ক্রিন ওভারলে */
+/* =========================================================================
+   🔒 ৩. ফুল-স্ক্রিন আনলক ওভারলে (Full-Screen Unlock Overlay)
+   ========================================================================= */
 .unlock-overlay {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(9, 9, 14, 0.98);
-    backdrop-filter: blur(12px);
-    display: flex; justify-content: center; align-items: center;
-    z-index: 2000; transition: all 0.5s ease-in-out;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 15, 0.98);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.5s ease;
 }
 
 .unlock-box {
-    background: #161625; padding: 40px 30px; border-radius: 24px;
-    text-align: center; max-width: 440px; width: 90%;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+    background: #161622;
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 450px;
+    width: 90%;
+    border: 2px solid #ff0055;
+    box-shadow: 0 0 30px rgba(255, 0, 85, 0.2);
 }
 
 .lock-icon-box {
-    width: 70px; height: 70px; background: rgba(255, 62, 62, 0.1);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 20px auto; border: 1px solid rgba(255, 62, 62, 0.3);
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 0, 85, 0.1);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px auto;
+    border: 1px solid #ff0055;
 }
 
-.lock-icon-box i { font-size: 28px; color: #ff3e3e; }
-.unlock-box h2 { font-size: 24px; margin-bottom: 12px; font-weight: 700; }
-.unlock-box p { font-size: 14px; color: #aaa; line-height: 1.6; margin-bottom: 25px; }
-
-.unlock-btn {
-    background: linear-gradient(90deg, #ff0000 0%, #cc0000 100%);
-    color: #fff; text-decoration: none; padding: 14px 24px; border-radius: 30px;
-    font-weight: bold; font-size: 15px; display: inline-flex; align-items: center;
-    gap: 10px; width: 100%; justify-content: center; box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3);
+.lock-icon-box i {
+    font-size: 35px;
+    color: #ff0055;
     transition: all 0.3s ease;
 }
 
-.unlock-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(255, 0, 0, 0.5); }
-.countdown-text { display: block; margin-top: 18px; font-size: 15px; color: #00bfff; font-weight: 600; }
-
-/* হেডার ডিজাইন */
-header {
-    width: 100%; max-width: 1050px;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 18px 25px; background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(15px); border-radius: 16px; margin-bottom: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+.unlock-box h2 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    font-weight: 700;
 }
 
-.logo h2 { font-size: 24px; color: #ff3e3e; display: flex; align-items: center; gap: 10px; font-weight: 700; }
-.logo h2 span { color: #fff; }
-.header-right { display: flex; align-items: center; gap: 15px; }
+.unlock-box p {
+    color: #aaa;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.unlock-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #ff0000;
+    color: #white;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.unlock-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 0, 0, 0.6);
+}
+
+.countdown-text {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #00ff88;
+    font-weight: 600;
+}
+
+/* =========================================================================
+   🖥️ ৪. মেইন হেডার নেভিগেশন (Main Header Navigation)
+   ========================================================================= */
+header {
+    background: #161622;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logo h2 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.logo h2 span {
+    color: #ff0055;
+}
+
+.logo i {
+    color: #ff0055;
+    margin-right: 5px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
 .viewer-box {
-    background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.25);
-    color: #00ff88; padding: 6px 16px; border-radius: 30px; font-size: 14px;
-    font-weight: 600; display: flex; align-items: center; gap: 8px;
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #00ff88;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
-.animate-flicker { animation: flicker 2s infinite; }
-@keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+.animate-flicker {
+    animation: flicker 2s infinite;
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
 
 .admin-btn {
-    background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #ccc; width: 38px; height: 38px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; font-size: 16px;
-    cursor: pointer; transition: all 0.3s ease;
+    background: #252538;
+    border: none;
+    color: #aaa;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.admin-btn:hover { color: #fff; background: #ff3e3e; border-color: #ff3e3e; transform: rotate(45deg); }
+.admin-btn:hover {
+    background: #ff0055;
+    color: #fff;
+    transform: rotate(45deg);
+}
 
-/* মেইন কন্টেইনার */
+/* =========================================================================
+   📺 ৫. প্লেয়ার এবং মেইন এরিয়া (Player & Main Area)
+   ========================================================================= */
 .container {
-    width: 100%; max-width: 1050px;
-    background: rgba(22, 22, 37, 0.7); border-radius: 20px;
-    overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-    border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+    max-width: 950px;
+    margin: 30px auto;
+    padding: 0 15px;
 }
 
-.player-header { padding: 20px 25px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: center; gap: 15px; }
-.player-header h1 { font-size: 20px; font-weight: 600; color: #f1f1f1; }
-.status-badge { display: inline-flex; align-items: center; gap: 6px; background: #ff3e3e; color: #fff; padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; }
+.player-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
 
-.pulse { font-size: 8px; animation: blink 1.2s infinite alternate; }
-@keyframes blink { 0% { opacity: 0.4; } 100% { opacity: 1; } }
+.status-badge {
+    background: #ff0055;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
 
-.video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; background: #000; }
-.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+.pulse {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    animation: pulseIcon 1.5s infinite;
+}
 
-/* কাউন্টডাউন সেকশন ডিজাইন */
+@keyframes pulseIcon {
+    0% { transform: scale(0.8); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0.8); opacity: 0.5; }
+}
+
+#streamTitle {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* ভিডিও রেশিও ১৬:৯ পারফেক্ট রাখার ট্রিক */
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    background: #000;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* =========================================================================
+   ⏱️ ৬. ম্যাচ কাউন্টডাউন সেকশন (Match Countdown Section)
+   ========================================================================= */
 .countdown-section {
-    background: linear-gradient(180deg, rgba(30, 30, 50, 0.4) 0%, rgba(15, 15, 27, 0.8) 100%);
-    padding: 30px;
+    background: #161622;
+    margin-top: 30px;
+    padding: 25px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
     text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.countdown-header i {
+    color: #ff0055;
+    margin-right: 5px;
 }
 
 .countdown-header span {
-    color: #ffaa00;
     font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 8px;
+    color: #aaa;
 }
 
 .countdown-header h2 {
     font-size: 26px;
+    margin: 8px 0;
     font-weight: 700;
-    margin-bottom: 5px;
-    color: #fff;
+    background: linear-gradient(to right, #fff, #bbb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .countdown-header p {
-    font-size: 13px;
-    color: #888;
-    margin-bottom: 25px;
+    color: #00ff88;
+    font-size: 14px;
+    margin-bottom: 20px;
 }
 
 .timer-grid {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .time-box {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    min-width: 80px;
-    padding: 12px;
+    background: #1f1f30;
+    padding: 15px 10px;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.02);
 }
 
 .time-box span {
     display: block;
-    font-size: 28px;
+    font-size: 30px;
     font-weight: 700;
-    color: #00bfff;
+    color: #fff;
 }
 
 .time-box small {
+    color: #888;
     font-size: 12px;
-    color: #aaa;
-    font-weight: 600;
 }
 
-/* অ্যাডমিন মডাল ও ইনপুট */
+/* =========================================================================
+   🛠️ ৭. অ্যাডমিন মডাল উইন্ডো (Admin Modal Popup)
+   ========================================================================= */
 .modal {
-    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(5, 5, 10, 0.85); backdrop-filter: blur(8px);
-    justify-content: center; align-items: center; z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    z-index: 2000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
 }
 
 .modal-content {
-    background: #161625; padding: 30px; border-radius: 16px;
-    width: 90%; max-width: 440px; border: 1px solid rgba(255,255,255,0.08); position: relative;
+    background: #161622;
+    width: 90%;
+    max-width: 450px;
+    padding: 30px;
+    border-radius: 16px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.close-modal { position: absolute; top: 15px; right: 20px; color: #aaa; cursor: pointer; font-size: 24px; }
-.modal-content h3 { font-size: 20px; color: #fff; margin-bottom: 15px;}
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: #fff;
+}
+
+.modal h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.modal input[type="text"],
+.modal input[type="password"],
+.modal input[type="datetime-local"] {
+    width: 100%;
+    padding: 12px;
+    background: #1f1f30;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: white;
+    margin-bottom: 15px;
+    font-size: 14px;
+    outline: none;
+}
+
+.modal input:focus {
+    border-color: #ff0055;
+}
+
+.modal button {
+    width: 100%;
+    padding: 12px;
+    background: #ff0055;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.modal button:hover {
+    background: #d9004c;
+}
 
 .admin-input-group {
     margin-bottom: 15px;
@@ -217,33 +432,27 @@ header {
 .admin-input-group label {
     display: block;
     font-size: 13px;
-    color: #bbb;
+    color: #aaa;
     margin-bottom: 6px;
 }
 
-.modal-content input {
-    width: 100%; padding: 12px 15px; border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.1); background: #0f0f1b; color: #fff; outline: none;
+.admin-input-group input {
+    margin-bottom: 0 !important;
 }
-.modal-content input:focus { border-color: #ff3e3e; }
-.modal-content button {
-    width: 100%; padding: 14px; background: #ff3e3e; border: none; color: white; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px;
-}
-.hidden { display: none; }
 
 /* =========================================================================
-   📺 স্থায়ী ফ্লোটিং সাবস্ক্রাইব পপআপ স্টাইল
+   📺 ৮. স্থায়ী ফ্লোটিং সাবস্ক্রাইব পপআপ স্টাইল (Floating Subscribe Popup)
    ========================================================================= */
 .floating-sub-popup {
     position: fixed;
     bottom: 25px;
     right: 25px;
-    background: rgba(20, 20, 20, 0.95);
+    background: rgba(22, 22, 34, 0.95);
     border: 1px solid #ff0055;
     border-radius: 12px;
     padding: 12px 18px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(255, 0, 85, 0.1);
-    z-index: 90; /* অ্যাডমিন মডালের নিচে কিন্তু প্লেয়ারের উপরে থাকবে */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(255, 0, 85, 0.05);
+    z-index: 90;
     backdrop-filter: blur(8px);
     transition: all 0.3s ease;
     animation: popupSlideUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -305,17 +514,35 @@ header {
     100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(255, 0, 0, 0)); }
 }
 
-/* 📱 মোবাইল রেসপন্সিভ (মোবাইলে স্ক্রিন ছোট তাই নিচে সোজা হয়ে থাকবে) */
+/* =========================================================================
+   📱 ৯. মোবাইল ও ট্যাবলেট রেসপন্সিভ মিডিয়া কোয়েরি (Responsive Design)
+   ========================================================================= */
+@media (max-width: 768px) {
+    .countdown-header h2 { font-size: 22px; }
+    .timer-grid { gap: 10px; }
+    .time-box span { font-size: 24px; }
+}
+
 @media (max-width: 600px) {
+    header {
+        padding: 12px 4%;
+    }
+    .logo h2 { font-size: 18px; }
+    #streamTitle { font-size: 17px; }
+    
+    .countdown-section { padding: 15px; }
+    .countdown-header h2 { font-size: 18px; }
+    
+    /* মোবাইলে ফ্লোটিং উইজেট নিচে ফুল-উইডথ ও মিনিমাল হয়ে যাবে */
     .floating-sub-popup {
-        bottom: 15px;
-        left: 15px;
-        right: 15px;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
         padding: 10px 14px;
         border-radius: 10px;
     }
     .sub-text p {
-        display: none; /* মোবাইলে স্ক্রিন ছোট রাখার জন্য ভেতরের ছোট টেক্সট হাইড থাকবে */
+        display: none; /* মোবাইল স্ক্রিনে ক্লিন রাখার জন্য ছোট বর্ণনা হাইড থাকবে */
     }
     .sub-text h4 {
         font-size: 13px;
